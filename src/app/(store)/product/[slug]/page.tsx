@@ -10,19 +10,6 @@ interface ProductProps {
     }
 }
 
-// Função que retorna as props para a página estática (sem ser em rota dinâmica)
-export async function getStaticProps() {
-    const response = await api('/products/featured')  // Exemplo de requisição para um produto destacado
-    const product = await response.json()
-
-    return {
-        props: {
-            product,
-        },
-        revalidate: 60 * 60, // Opção de revalidação (regerar a página a cada 1 hora, por exemplo)
-    }
-}
-
 export async function generateMetadata({ params }: ProductProps): Promise<Metadata> {//pra alterar o titulo do texto dinamicamente de acordo com o params da URL
 
     const product = await getProduct(params.slug);
